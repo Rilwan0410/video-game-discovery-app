@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Button, Grid, GridItem, Show, Theme } from "@chakra-ui/react";
 import { HStack } from "@chakra-ui/react";
+import GameGrid from "./components/GameGrid";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         Aside
       </GridItem>
 
-      <GridItem area="main">Main</GridItem>
+      <GridItem area="main">
+        <GameGrid />
+      </GridItem>
     </Grid>
   );
 }
