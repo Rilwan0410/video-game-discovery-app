@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
-import { Button, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Button, Grid, GridItem, Show, Theme } from "@chakra-ui/react";
 import { HStack } from "@chakra-ui/react";
 
 function App() {
@@ -15,13 +15,11 @@ function App() {
         <Navbar />
       </GridItem>
 
-      <GridItem hideBelow="lg" area="aside" bg="gold">
+      <GridItem hideBelow="lg" area="aside">
         Aside
       </GridItem>
 
-      <GridItem area="main" bg="red">
-        Main
-      </GridItem>
+      <GridItem area="main">Main</GridItem>
     </Grid>
   );
 }
