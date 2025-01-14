@@ -15,7 +15,7 @@ function useGames() {
         setError(err.message);
       }
     })();
-  }, [games]);
+  }, []);
   return { games, error };
 }
 
