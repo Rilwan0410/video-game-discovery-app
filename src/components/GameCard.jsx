@@ -1,10 +1,11 @@
 import { Card, Image, Button, Text } from "@chakra-ui/react";
 import React from "react";
+import PlatformIconList from "./PlatformIconList";
 
 function GameCard({ game }) {
   return (
     <Card.Root
-      maxW={{ sm: "", md: "350px", lg: "", xl: "sm" }}
+      maxW={{ sm: "", md: "450px", lg: "", xl: "sm" }}
       minH={{ sm: "", md: "sm", lg: "", xl: "sm" }}
       overflow="hidden"
     >
@@ -14,6 +15,9 @@ function GameCard({ game }) {
       />
       <Card.Body>
         <Card.Title fontSize={"xl"}>{game.name}</Card.Title>
+        {/* <Card.Description> */}
+          <PlatformIconList game={game} />
+        {/* </Card.Description> */}
       </Card.Body>
     </Card.Root>
   );

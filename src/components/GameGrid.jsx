@@ -20,7 +20,7 @@ function GameGrid() {
         gap='6'
         gapX={{
             sm:'',
-            md:'0',
+            md:'4',
             lg:'6',
             xl:''
         }}

@@ -3,7 +3,7 @@ import apiClient from "../services/api-client";
 function useGames() {
   const [games, setGames] = useState([]);
   const [error, setError] = useState("");
-
+console.log(games)
   useEffect(() => {
     (async () => {
       try {
