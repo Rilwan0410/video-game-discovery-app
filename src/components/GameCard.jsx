@@ -1,6 +1,7 @@
 import { Card, Image, Button, Text } from "@chakra-ui/react";
 import React from "react";
 import PlatformIconList from "./PlatformIconList";
+import CriticScore from "./CriticScore";
 
 function GameCard({ game }) {
   return (
@@ -15,9 +16,7 @@ function GameCard({ game }) {
       />
       <Card.Body>
         <Card.Title fontSize={"xl"}>{game.name}</Card.Title>
-        {/* <Card.Description> */}
-          <PlatformIconList game={game} />
-        {/* </Card.Description> */}
+        <PlatformIconList game={game} />
       </Card.Body>
     </Card.Root>
   );

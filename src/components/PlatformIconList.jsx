@@ -7,28 +7,67 @@ import {
   FaXbox,
   FaApple,
 } from "react-icons/fa";
-import { MdPhoneIphone } from "react-icons/md";
+import { useColorMode } from "./ui/color-mode";
 import { SiNintendo } from "react-icons/si";
-import { BsGlobe } from "react-icons/bs";
-
-const iconObject = {
-  Linux: <FaLinux  key={Math.random() * 10000} color ='#A0AEC0'/>,
-  PlayStation: <FaPlaystation key={Math.random() * 10000} color ='#A0AEC0'/>,
-  Xbox: <FaXbox key={Math.random() * 10000} color ='#A0AEC0'/>,
-  Macintosh: <FaApple key={Math.random() * 10000} color ='#A0AEC0'/>,
-  PC: <FaWindows key={Math.random() * 10000} color ='#A0AEC0'/>,
-  Android: <FaAndroid key={Math.random() * 10000} color ='#A0AEC0'/>,
-  Nintendo: <SiNintendo key={Math.random() * 10000} color ='#A0AEC0'/>,
-};
-
-// Object.keys(iconObject).map(icon => console.log(iconObject[icon]))
+import CriticScore from "./CriticScore";
+// import { BsGlobe } from "react-icons/bs";
+// import { MdPhoneIphone } from "react-icons/md";
 
 function PlatformIconList({ game }) {
+  const { colorMode } = useColorMode();
+  const iconObject = {
+    Linux: (
+      <FaLinux
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    PlayStation: (
+      <FaPlaystation
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    Xbox: (
+      <FaXbox
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    Macintosh: (
+      <FaApple
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    PC: (
+      <FaWindows
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    Android: (
+      <FaAndroid
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    Nintendo: (
+      <SiNintendo
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+  };
+
   return (
-    <HStack marginTop={2}>
-      {game.parent_platforms.map(
-        (platform, index) => iconObject[platform.platform.name]
-      )}
+    <HStack display="flex" justifyContent="space-between" marginTop={2}>
+      <div style={{display:'flex', gap:'10px'}}>
+        {game.parent_platforms.map(
+          (platform) => iconObject[platform.platform.name]
+        )}
+      </div>
+      <CriticScore score={game.metacritic} />
     </HStack>
   );
 }
