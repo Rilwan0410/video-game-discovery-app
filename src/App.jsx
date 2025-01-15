@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import { Button, Grid, GridItem, Show, Theme } from "@chakra-ui/react";
 import { HStack } from "@chakra-ui/react";
 import GameGrid from "./components/GameGrid";
+import GenreList from "./components/GenreList";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       </GridItem>
 
       <GridItem hideBelow="lg" area="aside">
-        Aside
+        <GenreList/>
       </GridItem>
 
       <GridItem area="main">

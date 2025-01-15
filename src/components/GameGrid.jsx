@@ -6,11 +6,11 @@ import GameCardSkeleton from "./GameCardSkeleton";
 function GameGrid() {
   const { games, error, isLoading } = useGames();
 
-  function renderAmount(num) {
+  function renderSkeleton(amount) {
     let arr = [];
 
-    for (let i = 0; i < num; i++) {
-      arr.push(num);
+    for (let i = 0; i < amount; i++) {
+      arr.push(amount);
     }
 
     return arr.map((each, index) => <GameCardSkeleton key={index} />);
@@ -36,7 +36,7 @@ function GameGrid() {
           xl: "",
         }}
       >
-        {isLoading && renderAmount(10)}
+        {isLoading && renderSkeleton(10)}
 
         {games.map((game) => (
           <GridItem borderRadius={10} key={game.id}>
