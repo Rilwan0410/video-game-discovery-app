@@ -1,23 +1,36 @@
 import useGenres from "../hooks/useGenres";
-import { HStack, Image, List, Text } from "@chakra-ui/react";
+import { HStack, Image, List, Text, Spinner, Link } from "@chakra-ui/react";
+import { SkeletonText } from "./ui/skeleton";
+function GenreList({ onSelectGenre }) {
+  const { genres, isLoading, error } = useGenres();
 
-function GenreList() {
-  const { genres } = useGenres();
-
-  console.log(genres);
+  if (error) return null;
   return (
-    <List.Root listStyle={"none"}  gap={4}>
-      {genres.map((genre, index) => {
-        return (
-          <List.Item key={index}>
-            <HStack>
-              <Image src={genre.image_background} borderRadius={8} boxSize="32px" />
-              <Text fontSize='lg'>{genre.name}</Text>
-            </HStack>
-          </List.Item>
-        );
-      })}
-    </List.Root>
+    <>
+      {isLoading && (
+        <HStack width="120px">
+          <Spinner />
+        </HStack>
+      )}
+      <List.Root listStyle={"none"} gap={4}>
+        {genres.map((genre, index) => {
+          return (
+            <List.Item key={index}>
+              <HStack>
+                <Image
+                  src={genre.image_background}
+                  borderRadius={8}
+                  boxSize="32px"
+                />
+                <Link onClick={() => onSelectGenre(genre)} fontSize="lg">
+                  {genre.name}
+                </Link>
+              </HStack>
+            </List.Item>
+          );
+        })}
+      </List.Root>
+    </>
   );
 }
 

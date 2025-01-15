@@ -6,6 +6,8 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 
 function App() {
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  // console.log(selectedGenre);
   return (
     <Grid
       templateAreas={{
@@ -18,11 +20,11 @@ function App() {
       </GridItem>
 
       <GridItem hideBelow="lg" area="aside" paddingX={5}>
-        <GenreList/>
+        <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
       </GridItem>
 
       <GridItem area="main">
-        <GameGrid />
+        <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );

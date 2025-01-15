@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-function useGames() {
+function useGames(selectedGenre) {
   const [games, setGames] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
-  // console.log(games);
 
   useEffect(() => {
     setLoading(true);
@@ -12,7 +11,9 @@ function useGames() {
       try {
         const {
           data: { results: gameData },
-        } = await apiClient.get("/games");
+        } = await apiClient.get(`/games`, {
+          params: { genres: selectedGenre?.id },
+        });
         setGames(gameData);
         setLoading(false);
       } catch (err) {
@@ -20,7 +21,7 @@ function useGames() {
         setError(err.message);
       }
     })();
-  }, []);
+  }, [selectedGenre?.id]);
   return { games, error, isLoading };
 }
 
