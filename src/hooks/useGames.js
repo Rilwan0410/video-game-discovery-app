@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-function useGames(selectedGenre) {
+function useGames(selectedGenre, selectedPlatform) {
   const [games, setGames] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -12,7 +12,10 @@ function useGames(selectedGenre) {
         const {
           data: { results: gameData },
         } = await apiClient.get(`/games`, {
-          params: { genres: selectedGenre?.id },
+          params: {
+            genres: selectedGenre?.id,
+            parent_platforms: selectedPlatform?.id,
+          },
         });
         setGames(gameData);
         setLoading(false);
@@ -21,7 +24,7 @@ function useGames(selectedGenre) {
         setError(err.message);
       }
     })();
-  }, [selectedGenre?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id]);
   return { games, error, isLoading };
 }
 

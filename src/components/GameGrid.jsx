@@ -4,8 +4,8 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import PlatformSelector from "./PlatformSelector";
 
-function GameGrid({ selectedGenre }) {
-  const { games, error, isLoading } = useGames(selectedGenre);
+function GameGrid({ selectedGenre, selectedPlatform, setSelectedPlatform }) {
+  const { games, error, isLoading } = useGames(selectedGenre,selectedPlatform);
 
   function renderSkeleton(amount) {
     let arr = [];
@@ -20,7 +20,11 @@ function GameGrid({ selectedGenre }) {
   return (
     <>
       {error && <Text>{error}</Text>}
-
+      <PlatformSelector
+        isLoading={isLoading}
+        selectedPlatform={selectedPlatform}
+        setSelectedPlatform={setSelectedPlatform}
+      />
       <Grid
         placeItems="center"
         padding={"10px"}
