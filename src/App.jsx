@@ -4,6 +4,7 @@ import { Button, Grid, GridItem, Show, Theme } from "@chakra-ui/react";
 import { HStack } from "@chakra-ui/react";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
+import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState(null);
@@ -20,10 +21,14 @@ function App() {
       </GridItem>
 
       <GridItem hideBelow="lg" area="aside" paddingX={5}>
-        <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
+        <GenreList
+          selectedGenre={selectedGenre}
+          onSelectGenre={(genre) => setSelectedGenre(genre)}
+        />
       </GridItem>
 
       <GridItem area="main">
+        <PlatformSelector/>
         <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>

@@ -2,6 +2,7 @@ import { Grid, GridItem, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
+import PlatformSelector from "./PlatformSelector";
 
 function GameGrid({ selectedGenre }) {
   const { games, error, isLoading } = useGames(selectedGenre);
@@ -19,6 +20,7 @@ function GameGrid({ selectedGenre }) {
   return (
     <>
       {error && <Text>{error}</Text>}
+
       <Grid
         placeItems="center"
         padding={"10px"}

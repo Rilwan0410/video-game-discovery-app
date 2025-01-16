@@ -1,7 +1,7 @@
 import useGenres from "../hooks/useGenres";
 import { HStack, Image, List, Text, Spinner, Link } from "@chakra-ui/react";
 import { SkeletonText } from "./ui/skeleton";
-function GenreList({ onSelectGenre }) {
+function GenreList({ onSelectGenre, selectedGenre }) {
   const { genres, isLoading, error } = useGenres();
 
   if (error) return null;
@@ -22,7 +22,14 @@ function GenreList({ onSelectGenre }) {
                   borderRadius={8}
                   boxSize="32px"
                 />
-                <Link onClick={() => onSelectGenre(genre)} fontSize="lg">
+                <Link
+                  variant={
+                    selectedGenre?.name === genre.name ? "underline" : ""
+                  }
+                  fontWeight={selectedGenre?.name === genre.name ? "bold" : ""}
+                  fontSize={selectedGenre?.name === genre.name ? "xl" : "lg"}
+                  onClick={() => onSelectGenre(genre)}
+                >
                   {genre.name}
                 </Link>
               </HStack>
