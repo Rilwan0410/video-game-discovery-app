@@ -1,11 +1,13 @@
-import { Grid, GridItem, Text } from "@chakra-ui/react";
+import { Grid, GridItem, Text, HStack } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import PlatformSelector from "./PlatformSelector";
+import SortSelector from "./SortSelector";
+import { Spinner } from "@chakra-ui/react";
 
 function GameGrid({ selectedGenre, selectedPlatform, setSelectedPlatform }) {
-  const { games, error, isLoading } = useGames(selectedGenre,selectedPlatform);
+  const { games, error, isLoading } = useGames(selectedGenre, selectedPlatform);
 
   function renderSkeleton(amount) {
     let arr = [];
@@ -20,11 +22,18 @@ function GameGrid({ selectedGenre, selectedPlatform, setSelectedPlatform }) {
   return (
     <>
       {error && <Text>{error}</Text>}
-      <PlatformSelector
-        isLoading={isLoading}
-        selectedPlatform={selectedPlatform}
-        setSelectedPlatform={setSelectedPlatform}
-      />
+      {isLoading ? (
+        <Spinner size="xs" marginLeft="25px" />
+      ) : (
+        <HStack gap={"3"} marginBottom={5}>
+          <PlatformSelector
+            isLoading={isLoading}
+            selectedPlatform={selectedPlatform}
+            setSelectedPlatform={setSelectedPlatform}
+          />
+          <SortSelector />
+        </HStack>
+      )}
       <Grid
         placeItems="center"
         padding={"10px"}

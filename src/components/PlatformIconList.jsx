@@ -8,14 +8,34 @@ import {
   FaApple,
 } from "react-icons/fa";
 import { useColorMode } from "./ui/color-mode";
-import { SiNintendo } from "react-icons/si";
+import { SiNintendo, SiAtari } from "react-icons/si";
+import { BsGlobe } from "react-icons/bs";
 import CriticScore from "./CriticScore";
+
 // import { BsGlobe } from "react-icons/bs";
-// import { MdPhoneIphone } from "react-icons/md";
+import { MdPhoneIphone } from "react-icons/md";
 
 function PlatformIconList({ game }) {
   const { colorMode } = useColorMode();
   const iconObject = {
+    iOS: (
+      <MdPhoneIphone
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    Atari: (
+      <SiAtari
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    Web: (
+      <BsGlobe
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
     Linux: (
       <FaLinux
         key={Math.random() * 10000}
@@ -34,7 +54,7 @@ function PlatformIconList({ game }) {
         color={colorMode === "dark" ? "#A0AEC0" : "black"}
       />
     ),
-    Macintosh: (
+    "Apple Macintosh": (
       <FaApple
         key={Math.random() * 10000}
         color={colorMode === "dark" ? "#A0AEC0" : "black"}
@@ -62,7 +82,7 @@ function PlatformIconList({ game }) {
 
   return (
     <HStack display="flex" justifyContent="space-between" marginTop={2}>
-      <div style={{display:'flex', gap:'10px'}}>
+      <div style={{ display: "flex", gap: "10px" }}>
         {game.parent_platforms.map(
           (platform) => iconObject[platform.platform.name]
         )}

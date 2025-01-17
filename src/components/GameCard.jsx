@@ -11,6 +11,8 @@ function GameCard({ game }) {
     >
       <Image
         minH={{ sm: "", md: "2xs", lg: "", xl: "xs" }}
+        minW='xs'
+        maxH={{ sm: "", md: "2xs", lg: "", xl: "xs" }}
         src={game.background_image}
       />
       <Card.Body>
