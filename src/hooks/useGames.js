@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-function useGames(selectedGenre, selectedPlatform) {
+function useGames(selectedGenre, selectedPlatform, sortBy) {
   const [games, setGames] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -15,6 +15,7 @@ function useGames(selectedGenre, selectedPlatform) {
           params: {
             genres: selectedGenre?.id,
             parent_platforms: selectedPlatform?.id,
+            ordering: sortBy?.value,
           },
         });
         setGames(gameData);
@@ -24,7 +25,7 @@ function useGames(selectedGenre, selectedPlatform) {
         setError(err.message);
       }
     })();
-  }, [selectedGenre?.id, selectedPlatform?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id, sortBy?.value]);
   return { games, error, isLoading };
 }
 

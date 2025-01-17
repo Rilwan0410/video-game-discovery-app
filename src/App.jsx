@@ -7,7 +7,8 @@ import GenreList from "./components/GenreList";
 function App() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedPlatform, setSelectedPlatform] = useState(null);
-  // console.log(selectedGenre);
+  const [sortBy, setSortBy] = useState(null);
+  
   return (
     <Grid
       templateAreas={{
@@ -28,6 +29,8 @@ function App() {
 
       <GridItem area="main">
         <GameGrid
+          sortBy={sortBy}
+          setSortBy={setSortBy}
           selectedGenre={selectedGenre}
           selectedPlatform={selectedPlatform}
           setSelectedPlatform={setSelectedPlatform}

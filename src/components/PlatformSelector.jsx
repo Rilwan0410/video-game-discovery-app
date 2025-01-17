@@ -10,11 +10,10 @@ import { Spinner } from "@chakra-ui/react";
 import usePlatforms from "../hooks/usePlatforms";
 
 function PlatformSelector({
-  isLoading,
+//   isLoading,
   selectedPlatform,
   setSelectedPlatform,
 }) {
-  console.log(selectedPlatform);
   const { platform, error } = usePlatforms();
   if (error) return null;
   return (
