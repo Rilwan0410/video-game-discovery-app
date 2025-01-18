@@ -8,16 +8,22 @@ function App() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedPlatform, setSelectedPlatform] = useState(null);
   const [sortBy, setSortBy] = useState(null);
-  
+  const [searchby, setSearchby] = useState("");
   return (
     <Grid
+    paddingTop='135px'
+    position='relative'
       templateAreas={{
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`, // wider than 1024px
       }}
     >
       <GridItem area="nav">
-        <Navbar />
+        <Navbar
+        
+          searchby={searchby}
+          setSearchby={setSearchby}
+        />
       </GridItem>
 
       <GridItem hideBelow="lg" area="aside" paddingX={5}>
@@ -34,6 +40,7 @@ function App() {
           selectedGenre={selectedGenre}
           selectedPlatform={selectedPlatform}
           setSelectedPlatform={setSelectedPlatform}
+          searchby={searchby}
         />
       </GridItem>
     </Grid>

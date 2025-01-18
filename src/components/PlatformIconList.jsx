@@ -94,7 +94,7 @@ function PlatformIconList({ game }) {
   return (
     <HStack display="flex" justifyContent="space-between" marginTop={2}>
       <div style={{ display: "flex", gap: "10px" }}>
-        {game.parent_platforms.map(
+        {game.parent_platforms?.map(
           (platform) => iconObject[platform.platform.name]
         )}
       </div>

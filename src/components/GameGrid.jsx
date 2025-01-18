@@ -5,6 +5,7 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import PlatformSelector from "./PlatformSelector";
 import SortSelector from "./SortSelector";
 import { Spinner } from "@chakra-ui/react";
+import GameHeading from "./GameHeading";
 
 function GameGrid({
   selectedGenre,
@@ -12,11 +13,13 @@ function GameGrid({
   setSelectedPlatform,
   sortBy,
   setSortBy,
+  searchby,
 }) {
   const { games, error, isLoading } = useGames(
     selectedGenre,
     selectedPlatform,
-    sortBy
+    sortBy,
+    searchby
   );
 
   function renderSkeleton(amount) {
@@ -31,11 +34,16 @@ function GameGrid({
 
   return (
     <>
+      <GameHeading
+        selectedPlatform={selectedPlatform}
+        selectedGenre={selectedGenre}
+    searchby={searchby}
+      />
       {error && <Text>{error}</Text>}
       {isLoading ? (
         <Spinner size="xs" marginLeft="25px" />
       ) : (
-        <HStack gap={"4"} marginBottom={5}>
+        <HStack gap={"4"} marginLeft="8px" marginBottom={5}>
           <PlatformSelector
             isLoading={isLoading}
             selectedPlatform={selectedPlatform}

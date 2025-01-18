@@ -3,17 +3,24 @@ import React from "react";
 import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
+import { useColorMode } from "./ui/color-mode";
 
-function Navbar() {
+function Navbar({ searchby, setSearchby }) {
+  const { colorMode } = useColorMode();
   return (
     <HStack
+      background={colorMode === "dark" ? "black" : "white"}
+      position="fixed"
+      zIndex={10}
+      top="0"
       justifyContent="space-between"
       paddingX="20px"
       paddingTop="15px"
-      paddingBottom="55px"
+      paddingBottom="10px"
+      width="full"
     >
       <Image src={logo} boxSize="60px" />
-      <SearchInput />
+      <SearchInput searchby={searchby} setSearchby={setSearchby} />
       <ColorModeSwitch />
     </HStack>
   );
