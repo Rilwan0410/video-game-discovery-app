@@ -43,7 +43,7 @@ function GameGrid({
       {isLoading ? (
         <Spinner size="xs" marginLeft="25px" />
       ) : (
-        <HStack gap={"4"} marginLeft="8px" marginBottom={5}>
+        <HStack gap={"5"} marginLeft="8px" marginBottom={5}>
           <PlatformSelector
             isLoading={isLoading}
             selectedPlatform={selectedPlatform}

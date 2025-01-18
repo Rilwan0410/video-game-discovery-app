@@ -7,7 +7,10 @@ import {
 import { BsChevronDown } from "react-icons/bs";
 import { Button } from "@chakra-ui/react";
 
+import { useColorMode } from "./ui/color-mode";
 function SortSelector({ sortBy, setSortBy }) {
+  const { colorMode } = useColorMode();
+  
   const sortOrder = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date Added" },
@@ -19,7 +22,10 @@ function SortSelector({ sortBy, setSortBy }) {
   return (
     <MenuRoot>
       <MenuTrigger outline="none" asChild>
-        <Button>
+        <Button
+          background={colorMode === "dark" ? "#202020" : "#ededed"}
+          color={colorMode === "dark" ? "white" : "black"}
+        >
           Order By: {sortBy?.label || "Relevance"}
           <BsChevronDown />
         </Button>
