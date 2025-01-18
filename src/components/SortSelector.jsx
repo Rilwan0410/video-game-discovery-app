@@ -6,8 +6,6 @@ import {
 } from "../components/ui/menu";
 import { BsChevronDown } from "react-icons/bs";
 import { Button } from "@chakra-ui/react";
-import { Spinner } from "@chakra-ui/react";
-import usePlatforms from "../hooks/usePlatforms";
 
 function SortSelector({ sortBy, setSortBy }) {
   const sortOrder = [

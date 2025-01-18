@@ -1,7 +1,7 @@
 import { Input, Group, InputAddon, Fieldset } from "@chakra-ui/react";
 import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
-function SearchInput({ searchby, setSearchby }) {
+function SearchInput({ setSearchby }) {
   const [input, setInput] = useState("");
   return (
     <form

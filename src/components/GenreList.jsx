@@ -1,18 +1,20 @@
-import useGenres from "../hooks/useGenres";
-import { HStack, Image, List, Text, Spinner, Link } from "@chakra-ui/react";
-function GenreList({ onSelectGenre, selectedGenre }) {
-  const { genres, isLoading, error } = useGenres();
+// import useGenres from "../hooks/useGenres";
+import { HStack, Image, List, Spinner, Link } from "@chakra-ui/react";
+import genresData from "../data/genres";
 
-  if (error) return null;
+function GenreList({ onSelectGenre, selectedGenre }) {
+  // const {  isLoading, error } = useGenres();
+
+  // if (error) return null;
   return (
     <>
-      {isLoading && (
+      {/* {isLoading && (
         <HStack width="120px">
           <Spinner />
         </HStack>
-      )}
+      )} */}
       <List.Root listStyle={"none"} gap={4}>
-        {genres.map((genre, index) => {
+        {genresData.map((genre, index) => {
           return (
             <List.Item key={index}>
               <HStack>

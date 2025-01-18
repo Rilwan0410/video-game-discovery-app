@@ -6,7 +6,6 @@ function CriticScore({ score }) {
       {score && (
         <Badge
           fontSize="15px"
-          //   colorScheme={color}
           padding="5px"
           colorPalette={color}
           width="fit-content"
