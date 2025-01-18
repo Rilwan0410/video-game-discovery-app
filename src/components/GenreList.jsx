@@ -1,6 +1,5 @@
 import useGenres from "../hooks/useGenres";
 import { HStack, Image, List, Text, Spinner, Link } from "@chakra-ui/react";
-import { SkeletonText } from "./ui/skeleton";
 function GenreList({ onSelectGenre, selectedGenre }) {
   const { genres, isLoading, error } = useGenres();
 

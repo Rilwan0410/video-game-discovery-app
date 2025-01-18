@@ -1,4 +1,4 @@
-import { HStack, Icon } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import {
   FaWindows,
   FaPlaystation,
@@ -8,16 +8,27 @@ import {
   FaApple,
 } from "react-icons/fa";
 import { useColorMode } from "./ui/color-mode";
-import { SiNintendo, SiAtari } from "react-icons/si";
+import { SiNintendo, SiAtari, SiSega } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import CriticScore from "./CriticScore";
-
-// import { BsGlobe } from "react-icons/bs";
+import { GiRetroController } from "react-icons/gi";
 import { MdPhoneIphone } from "react-icons/md";
 
 function PlatformIconList({ game }) {
   const { colorMode } = useColorMode();
   const iconObject = {
+    "Neo Geo": (
+      <GiRetroController
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
+    SEGA: (
+      <SiSega
+        key={Math.random() * 10000}
+        color={colorMode === "dark" ? "#A0AEC0" : "black"}
+      />
+    ),
     iOS: (
       <MdPhoneIphone
         key={Math.random() * 10000}

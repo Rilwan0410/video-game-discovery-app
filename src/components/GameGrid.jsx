@@ -29,7 +29,6 @@ function GameGrid({
     return arr.map((each, index) => <GameCardSkeleton key={index} />);
   }
 
-  console.log(sortBy)
   return (
     <>
       {error && <Text>{error}</Text>}
