@@ -10,7 +10,7 @@ import { Button } from "@chakra-ui/react";
 import { useColorMode } from "./ui/color-mode";
 function SortSelector({ sortBy, setSortBy }) {
   const { colorMode } = useColorMode();
-  
+
   const sortOrder = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date Added" },

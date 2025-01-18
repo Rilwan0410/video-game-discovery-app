@@ -1,7 +1,7 @@
 import { Card, Image } from "@chakra-ui/react";
 import React from "react";
 import PlatformIconList from "./PlatformIconList";
-import placeholderImage from '../assets/no-image-placeholder.webp'
+import placeholderImage from "../assets/no-image-placeholder.webp";
 
 function GameCard({ game }) {
   return (
@@ -12,7 +12,7 @@ function GameCard({ game }) {
     >
       <Image
         minH={{ sm: "", md: "2xs", lg: "", xl: "xs" }}
-        minW='xs'
+        minW="xs"
         maxH={{ sm: "", md: "2xs", lg: "", xl: "xs" }}
         src={game.background_image || placeholderImage}
       />

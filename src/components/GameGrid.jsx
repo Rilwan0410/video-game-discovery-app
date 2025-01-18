@@ -39,7 +39,7 @@ function GameGrid({
         selectedGenre={selectedGenre}
     searchby={searchby}
       />
-      {error && <Text>{error}</Text>}
+
       {isLoading ? (
         <Spinner size="xs" marginLeft="25px" />
       ) : (
