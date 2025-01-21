@@ -15,7 +15,7 @@ function GameGrid({
   setSortBy,
   searchby,
 }) {
-  const { games, error, isLoading } = useGames(
+  const { data, error, isLoading } = useGames(
     selectedGenre,
     selectedPlatform,
     sortBy,
@@ -37,7 +37,7 @@ function GameGrid({
       <GameHeading
         selectedPlatform={selectedPlatform}
         selectedGenre={selectedGenre}
-    searchby={searchby}
+        searchby={searchby}
       />
 
       {isLoading ? (
@@ -71,7 +71,7 @@ function GameGrid({
       >
         {isLoading && renderSkeleton(10)}
 
-        {games.map((game) => (
+        {data?.results?.map((game) => (
           <GridItem borderRadius={10} key={game.id}>
             <GameCard game={game} />
           </GridItem>
@@ -82,5 +82,3 @@ function GameGrid({
 }
 
 export default GameGrid;
-
-

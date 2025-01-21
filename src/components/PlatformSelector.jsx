@@ -11,7 +11,8 @@ import usePlatforms from "../hooks/usePlatforms";
 
 function PlatformSelector({ selectedPlatform, setSelectedPlatform }) {
   const { colorMode } = useColorMode();
-  const { platform, error } = usePlatforms();
+  const { data, error, isLoading } = usePlatforms();
+
   if (error) return null;
   return (
     <>
@@ -20,8 +21,8 @@ function PlatformSelector({ selectedPlatform, setSelectedPlatform }) {
           <Button
             marginLeft="12px"
             outline="none"
-            background={colorMode === 'dark' ? '#202020' : '#ededed'}
-            color={colorMode === 'dark' ? "white" : "black"}
+            background={colorMode === "dark" ? "#202020" : "#ededed"}
+            color={colorMode === "dark" ? "white" : "black"}
             fontWeight="500"
           >
             {selectedPlatform?.name || "Platforms"}
@@ -29,7 +30,7 @@ function PlatformSelector({ selectedPlatform, setSelectedPlatform }) {
           </Button>
         </MenuTrigger>
         <MenuContent>
-          {platform.map((platform) => {
+          {data?.results?.map((platform) => {
             return (
               <MenuItem
                 value={platform.slug}

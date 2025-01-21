@@ -1,31 +1,17 @@
-import { useEffect, useState } from "react";
+import genresData from "../data/genres";
+import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
-import genresData from '../data/genres'
 
 function useGenres() {
-  const [genres, setGenres] = useState([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-  
-
-  // useEffect(() => {
-  // //   setLoading(true);
-  // //   (async () => {
-  // //     try {
-  // //       const {
-  // //         data: { results: genresData },
-  // //       } = await apiClient.get("/genres");
-  // //       setGenres(genresData);
-  // //       setLoading(false);
-  // //     } catch (err) {
-  // //       setLoading(false);
-  // //       setError(err.message);
-  // //     }
-  // //   })();
-  // setGenres(genresData)
-  // }, []);
-
-  return { genres, error, isLoading };
+  return useQuery({
+    queryKey: ["genres"],
+    queryFn: async () => {
+      const res = await apiClient.get("/genres");
+      return res.data;
+    },
+    staleTime: 86_400_000,
+    initialData: genresData,
+  });
 }
 
 export default useGenres;

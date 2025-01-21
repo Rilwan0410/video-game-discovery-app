@@ -1,28 +1,15 @@
-import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 function usePlatforms() {
-  const [platform, setPlatform] = useState([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    (async () => {
-      try {
-        const {
-          data: { results: platformData },
-        } = await apiClient.get("/platforms/lists/parents");
-        setPlatform(platformData);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        setError(err.message);
-      }
-    })();
-  }, []);
-
-  return { platform, error, isLoading };
+  return useQuery({
+    queryKey: ["platforms"],
+    queryFn: async () => {
+      const { data } = await apiClient.get("/platforms/lists/parents");
+      return data;
+    },
+    staleTime: 86_400_000,
+  });
 }
 
 export default usePlatforms;
