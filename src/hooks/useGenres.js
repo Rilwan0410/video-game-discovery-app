@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import APIClientService from "../services/api-client";
 
 function useGenres() {
-  const apiClient = new APIClientService("/genres");
+  const apiClient = new APIClientService("genres");
   return useQuery({
     queryKey: ["genres"],
     queryFn: () => apiClient.get(),

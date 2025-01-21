@@ -6,13 +6,12 @@ const base = axios.create({
 });
 
 class APIClientService {
-  constructor(path, parameters) {
+  constructor(path) {
     this.path = path;
-    this.parameters = parameters;
   }
-  async get() {
+  async get(parameters) {
     const { data } = await base.get(this.path, {
-      params: { ...this.parameters },
+      params: { ...parameters },
     });
     return data;
   }

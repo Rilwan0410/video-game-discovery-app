@@ -11,19 +11,15 @@ function App() {
   const [searchby, setSearchby] = useState("");
   return (
     <Grid
-    paddingTop='135px'
-    position='relative'
+      paddingTop="135px"
+      position="relative"
       templateAreas={{
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`, // wider than 1024px
       }}
     >
       <GridItem area="nav">
-        <Navbar
-        
-          searchby={searchby}
-          setSearchby={setSearchby}
-        />
+        <Navbar searchby={searchby} setSearchby={setSearchby} />
       </GridItem>
 
       <GridItem hideBelow="lg" area="aside" paddingX={5}>

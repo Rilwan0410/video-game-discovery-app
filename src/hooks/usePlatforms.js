@@ -2,7 +2,7 @@ import APIClientService from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
 
 function usePlatforms() {
-  const apiClient = new APIClientService("/platforms/lists/parents");
+  const apiClient = new APIClientService("platforms/lists/parents");
   return useQuery({
     queryKey: ["platforms"],
     queryFn: () => apiClient.get(),

@@ -1,10 +1,9 @@
-import { Grid, GridItem, Text, HStack } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner, HStack, Button } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import PlatformSelector from "./PlatformSelector";
 import SortSelector from "./SortSelector";
-import { Spinner } from "@chakra-ui/react";
 import GameHeading from "./GameHeading";
 
 function GameGrid({
@@ -15,13 +14,7 @@ function GameGrid({
   setSortBy,
   searchby,
 }) {
-  const { data, error, isLoading } = useGames(
-    selectedGenre,
-    selectedPlatform,
-    sortBy,
-    searchby
-  );
-
+  // Ignore...
   function renderSkeleton(amount) {
     let arr = [];
 
@@ -31,6 +24,18 @@ function GameGrid({
 
     return arr.map((each, index) => <GameCardSkeleton key={index} />);
   }
+  // Ignore...
+
+  const {
+    data,
+    error,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useGames(selectedGenre, selectedPlatform, sortBy, searchby);
+
+  // console.log(data);
 
   return (
     <>
@@ -71,12 +76,29 @@ function GameGrid({
       >
         {isLoading && renderSkeleton(10)}
 
-        {data?.results?.map((game) => (
-          <GridItem borderRadius={10} key={game.id}>
-            <GameCard game={game} />
-          </GridItem>
-        ))}
+        {data?.pages.map((game) =>
+          game?.results.map((g) => {
+            return (
+              <GridItem borderRadius={10} key={g.id}>
+                <GameCard game={g} />
+              </GridItem>
+            );
+          })
+        )}
       </Grid>
+      {hasNextPage && (
+        <Button
+          marginY="25px"
+          width="130px"
+          marginLeft="10px"
+          variant="subtle"
+          onClick={() => {
+            fetchNextPage();
+          }}
+        >
+          {isFetchingNextPage ? <Spinner /> : "Load More"}
+        </Button>
+      )}
     </>
   );
 }
