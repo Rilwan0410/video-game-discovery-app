@@ -1,13 +1,11 @@
-import apiClient from "../services/api-client";
+import APIClientService from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
 
 function usePlatforms() {
+  const apiClient = new APIClientService("/platforms/lists/parents");
   return useQuery({
     queryKey: ["platforms"],
-    queryFn: async () => {
-      const { data } = await apiClient.get("/platforms/lists/parents");
-      return data;
-    },
+    queryFn: () => apiClient.get(),
     staleTime: 86_400_000,
   });
 }
