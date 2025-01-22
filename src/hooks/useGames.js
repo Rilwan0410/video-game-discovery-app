@@ -21,8 +21,8 @@ function useGames(selectedGenre, selectedPlatform, sortBy, searchby) {
       }),
     staleTime: 86_400_000,
     getNextPageParam: (lastPage, allPages) => {
-      console.log("last page:", lastPage);
-      console.log("all pages:", allPages);
+      // console.log("last page:", lastPage);
+      // console.log("all pages:", allPages);
       return lastPage.next ? allPages.length + 1 : undefined;
 
       // return lastPage.length > 0 ? allPages.length + 1 : undefined;

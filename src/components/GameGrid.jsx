@@ -5,6 +5,7 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import PlatformSelector from "./PlatformSelector";
 import SortSelector from "./SortSelector";
 import GameHeading from "./GameHeading";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function GameGrid({
   selectedGenre,
@@ -35,7 +36,10 @@ function GameGrid({
     hasNextPage,
   } = useGames(selectedGenre, selectedPlatform, sortBy, searchby);
 
-  // console.log(data);
+  let length = data?.pages.reduce((pageCount, totalPages) => {
+    return totalPages.results.length + pageCount;
+  }, 0);
+  console.log(length);
 
   return (
     <>
@@ -57,36 +61,45 @@ function GameGrid({
           <SortSelector sortBy={sortBy} setSortBy={setSortBy} />
         </HStack>
       )}
-      <Grid
-        placeItems="center"
-        padding={"10px"}
-        templateColumns={{
-          sm: "repeat(1, 1fr)",
-          md: "repeat(2, 1fr)",
-          lg: "repeat(3, 1fr)",
-          xl: "repeat(3,1fr)",
-        }}
-        gap="6"
-        gapX={{
-          sm: "",
-          md: "4",
-          lg: "6",
-          xl: "",
-        }}
+      <InfiniteScroll
+        dataLength={length || 20}
+        next={fetchNextPage}
+        hasMore={hasNextPage}
+        loader={<Spinner />}
+        endMessage={""}
       >
-        {isLoading && renderSkeleton(10)}
+        <Grid
+          placeItems="center"
+          padding={"10px"}
+          templateColumns={{
+            sm: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+            xl: "repeat(3,1fr)",
+          }}
+          gap="6"
+          gapX={{
+            sm: "",
+            md: "4",
+            lg: "6",
+            xl: "",
+          }}
+        >
+          {isLoading && renderSkeleton(10)}
 
-        {data?.pages.map((game) =>
-          game?.results.map((g) => {
-            return (
-              <GridItem borderRadius={10} key={g.id}>
-                <GameCard game={g} />
-              </GridItem>
-            );
-          })
-        )}
-      </Grid>
-      {hasNextPage && (
+          {data?.pages.map((game) =>
+            game?.results.map((g) => {
+              return (
+                <GridItem borderRadius={10} key={g.id}>
+                  <GameCard game={g} />
+                </GridItem>
+              );
+            })
+          )}
+        </Grid>
+      </InfiniteScroll>
+
+      {/* {hasNextPage && (
         <Button
           marginY="25px"
           width="130px"
@@ -98,7 +111,7 @@ function GameGrid({
         >
           {isFetchingNextPage ? <Spinner /> : "Load More"}
         </Button>
-      )}
+      )} */}
     </>
   );
 }
