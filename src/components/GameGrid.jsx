@@ -1,11 +1,12 @@
-import { Grid, GridItem, Spinner, HStack, Button } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Spinner } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
+import GameHeading from "./GameHeading";
 import PlatformSelector from "./PlatformSelector";
 import SortSelector from "./SortSelector";
-import GameHeading from "./GameHeading";
-import InfiniteScroll from "react-infinite-scroll-component";
+import store from "../store/store";
 
 function GameGrid({
   selectedGenre,
@@ -27,6 +28,7 @@ function GameGrid({
   }
   // Ignore...
 
+  const { search, setSearch } = store();
   const {
     data,
     error,
@@ -39,14 +41,13 @@ function GameGrid({
   let length = data?.pages.reduce((pageCount, totalPages) => {
     return totalPages.results.length + pageCount;
   }, 0);
-  console.log(length);
 
   return (
     <>
       <GameHeading
         selectedPlatform={selectedPlatform}
         selectedGenre={selectedGenre}
-        searchby={searchby}
+        searchby={search}
       />
 
       {isLoading ? (
@@ -98,20 +99,6 @@ function GameGrid({
           )}
         </Grid>
       </InfiniteScroll>
-
-      {/* {hasNextPage && (
-        <Button
-          marginY="25px"
-          width="130px"
-          marginLeft="10px"
-          variant="subtle"
-          onClick={() => {
-            fetchNextPage();
-          }}
-        >
-          {isFetchingNextPage ? <Spinner /> : "Load More"}
-        </Button>
-      )} */}
     </>
   );
 }

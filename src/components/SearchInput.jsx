@@ -1,15 +1,22 @@
 import { Input, Group, InputAddon, Fieldset } from "@chakra-ui/react";
 import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
-function SearchInput({ setSearchby }) {
+import store from "../store/store";
+function SearchInput() {
   const [input, setInput] = useState("");
+  const { search, setSearch } = store();
+  console.log(search);
   return (
     <form
       action=""
       onSubmit={(e) => {
         e.preventDefault();
-        setSearchby(input);
+        setSearch(input);
         setInput("");
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       }}
     >
       <Group attached>
@@ -17,7 +24,7 @@ function SearchInput({ setSearchby }) {
           placeholder="Search Games..."
           borderRadius={30}
           variant="subtle"
-          outline='none'
+          outline="none"
           border={"none"}
           fontSize="lg"
           width={{ xl: "5xl" }}
@@ -34,7 +41,7 @@ function SearchInput({ setSearchby }) {
           paddingRight="35px"
           cursor="pointer"
           onClick={() => {
-            setSearchby(input);
+            setSearch(input);
             setInput("");
           }}
         >

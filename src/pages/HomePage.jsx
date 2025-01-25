@@ -1,27 +1,22 @@
 import { useState } from "react";
-import Navbar from "./components/Navbar";
 import { Grid, GridItem } from "@chakra-ui/react";
-import GameGrid from "./components/GameGrid";
-import GenreList from "./components/GenreList";
-
-function App() {
+import GameGrid from "../components/GameGrid";
+import GenreList from "../components/GenreList";
+import store from "../store/store";
+function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedPlatform, setSelectedPlatform] = useState(null);
   const [sortBy, setSortBy] = useState(null);
-  const [searchby, setSearchby] = useState("");
+  //   const [searchby, setSearchby] = useState("");
+  const { search, setSearch } = store();
   return (
     <Grid
-      paddingTop="135px"
       position="relative"
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`, // wider than 1024px
+        base: `"main"`,
+        lg: `"aside main"`, // wider than 1024px
       }}
     >
-      <GridItem area="nav">
-        <Navbar searchby={searchby} setSearchby={setSearchby} />
-      </GridItem>
-
       <GridItem hideBelow="lg" area="aside" paddingX={5}>
         <GenreList
           selectedGenre={selectedGenre}
@@ -36,11 +31,11 @@ function App() {
           selectedGenre={selectedGenre}
           selectedPlatform={selectedPlatform}
           setSelectedPlatform={setSelectedPlatform}
-          searchby={searchby}
+          searchby={search}
         />
       </GridItem>
     </Grid>
   );
 }
 
-export default App;
+export default HomePage;

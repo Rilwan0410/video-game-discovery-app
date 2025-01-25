@@ -1,7 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import APIClientService from "../services/api-client";
+import store from "../store/store";
 
 function useGames(selectedGenre, selectedPlatform, sortBy, searchby) {
+
+const   {search} = store()
   const apiClient = new APIClientService("games");
   return useInfiniteQuery({
     queryKey: [
@@ -10,6 +13,7 @@ function useGames(selectedGenre, selectedPlatform, sortBy, searchby) {
       selectedPlatform?.id,
       sortBy?.value,
       searchby,
+
     ],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.get({

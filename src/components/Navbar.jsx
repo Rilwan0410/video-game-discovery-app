@@ -1,11 +1,12 @@
 import { HStack, Image } from "@chakra-ui/react";
-import React from "react";
 import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import { useColorMode } from "./ui/color-mode";
+import store from "../store/store";
 
-function Navbar({ searchby, setSearchby }) {
+function Navbar() {
+  const { search, setSearch } = store();
   const { colorMode } = useColorMode();
   return (
     <HStack
@@ -19,10 +20,10 @@ function Navbar({ searchby, setSearchby }) {
       paddingBottom="10px"
       width="full"
     >
-      <a href="">
+      <a href="/">
         <Image src={logo} boxSize="60px" />
       </a>
-      <SearchInput searchby={searchby} setSearchby={setSearchby} />
+      <SearchInput searchby={search} setSearchby={setSearch} />
       <ColorModeSwitch />
     </HStack>
   );
