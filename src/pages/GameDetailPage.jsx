@@ -1,24 +1,23 @@
 import { useParams } from "react-router-dom";
-import store from "../store/store";
 import { base } from "../services/api-client";
-import { Heading, Text, Box } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Heading, Text, Box, Button } from "@chakra-ui/react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SkeletonText, Skeleton } from "../components/ui/skeleton";
 
 function GameDetails() {
-  const { setSlug, slug } = store();
+  let [collapseString, setCollapseString] = useState(true);
   const params = useParams();
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["gameDetails"],
+    queryKey: ["game"],
     queryFn: async () => {
       const { data } = await base.get(`/games/${params.id}`);
       return data;
     },
+    staleTime: 86_400_000,
   });
 
-  // isLoading && <h1>Hello World</h1>;
   return isLoading ? (
     <Box padding={5}>
       <SkeletonText noOfLines={1} padding={4} marginBottom="20px" />
@@ -29,7 +28,30 @@ function GameDetails() {
       <Heading marginBottom={4} size="5xl">
         {data?.name}
       </Heading>
-      <Text fontSize="lg">{data?.description_raw}</Text>
+      <Text fontSize="lg">
+        {data?.description_raw.length > 400 && collapseString === true ? (
+          <>
+            <span>{data?.description_raw.substring(0, 400)}... </span>
+          </>
+        ) : (
+          data?.description_raw
+        )}
+        {data?.description_raw.length > 400 && (
+          <Button
+            // bg={"#FFFF80"}
+            colorPalette="yellow"
+            color="black"
+            fontSize="sm"
+            size="xs"
+            fontWeight="bold"
+            borderRadius="lg"
+            display={collapseString ? "" : "block"}
+            onClick={() => setCollapseString(!collapseString)}
+          >
+            {collapseString ? "Show More" : "Show Less"}
+          </Button>
+        )}
+      </Text>
     </Box>
   );
 }

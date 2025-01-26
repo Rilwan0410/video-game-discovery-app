@@ -2,7 +2,7 @@ import axios from "axios";
 
 const base = axios.create({
   baseURL: "https://api.rawg.io/api",
-  params: { key: "bea29dd1a6694f39ae0d93f2ec4e0706" },
+  params: { key: "8abd46b86e214b45b1bbf42b0a150b33" },
 });
 
 class APIClientService {
