@@ -4,8 +4,8 @@ import { useState } from "react";
 import store from "../store/store";
 function SearchInput() {
   const [input, setInput] = useState("");
-  const { search, setSearch } = store();
-  console.log(search);
+  const setSearch = store((s) => s.setSearch);
+
   return (
     <form
       action=""

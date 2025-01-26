@@ -18,3 +18,4 @@ class APIClientService {
 }
 
 export default APIClientService;
+export { base };

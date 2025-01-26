@@ -8,7 +8,7 @@ function HomePage() {
   const [selectedPlatform, setSelectedPlatform] = useState(null);
   const [sortBy, setSortBy] = useState(null);
   //   const [searchby, setSearchby] = useState("");
-  const { search, setSearch } = store();
+  const { search, genre, setSearch } = store();
   return (
     <Grid
       position="relative"
@@ -28,7 +28,7 @@ function HomePage() {
         <GameGrid
           sortBy={sortBy}
           setSortBy={setSortBy}
-          selectedGenre={selectedGenre}
+          selectedGenre={genre}
           selectedPlatform={selectedPlatform}
           setSelectedPlatform={setSelectedPlatform}
           searchby={search}

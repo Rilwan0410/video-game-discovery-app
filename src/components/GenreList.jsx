@@ -1,8 +1,9 @@
 import useGenres from "../hooks/useGenres";
 import { HStack, Image, List, Spinner, Link } from "@chakra-ui/react";
-
-function GenreList({ onSelectGenre, selectedGenre }) {
+import store from "../store/store";
+function GenreList() {
   const { data, isLoading, error } = useGenres();
+  const { genre: selectedGenre, setGenre } = store();
 
   if (error) return null;
   return (
@@ -28,7 +29,7 @@ function GenreList({ onSelectGenre, selectedGenre }) {
                   }
                   fontWeight={selectedGenre?.name === genre.name ? "bold" : ""}
                   fontSize={selectedGenre?.name === genre.name ? "xl" : "lg"}
-                  onClick={() => onSelectGenre(genre)}
+                  onClick={() => setGenre(genre)}
                 >
                   {genre.name}
                 </Link>

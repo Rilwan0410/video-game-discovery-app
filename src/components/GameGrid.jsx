@@ -28,7 +28,7 @@ function GameGrid({
   }
   // Ignore...
 
-  const { search, setSearch } = store();
+  const { search, genre, setSearch } = store();
   const {
     data,
     error,
@@ -46,7 +46,7 @@ function GameGrid({
     <>
       <GameHeading
         selectedPlatform={selectedPlatform}
-        selectedGenre={selectedGenre}
+        selectedGenre={genre}
         searchby={search}
       />
 
