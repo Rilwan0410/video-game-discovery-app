@@ -4,8 +4,10 @@ import { Heading, Text, Box, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SkeletonText, Skeleton } from "../components/ui/skeleton";
-
+import { useColorMode } from "../components/ui/color-mode";
+import GameDetailsGrid from "../components/GameDetailsGrid";
 function GameDetails() {
+  const { colorMode } = useColorMode();
   let [collapseString, setCollapseString] = useState(true);
   const params = useParams();
 
@@ -18,6 +20,7 @@ function GameDetails() {
     staleTime: 86_400_000,
   });
 
+
   return isLoading ? (
     <Box padding={5}>
       <SkeletonText noOfLines={1} padding={4} marginBottom="20px" />
@@ -25,7 +28,7 @@ function GameDetails() {
     </Box>
   ) : (
     <Box padding={5}>
-      <Heading marginBottom={4} size="5xl">
+      <Heading marginBottom={4}  size="5xl">
         {data?.name}
       </Heading>
       <Text fontSize="lg">
@@ -38,8 +41,7 @@ function GameDetails() {
         )}
         {data?.description_raw.length > 400 && (
           <Button
-            // bg={"#FFFF80"}
-            colorPalette="yellow"
+            bg={colorMode === "dark" ? "#FFFF80" : "gold"}
             color="black"
             fontSize="sm"
             size="xs"
@@ -52,6 +54,8 @@ function GameDetails() {
           </Button>
         )}
       </Text>
+
+      <GameDetailsGrid game={data} colorMode={colorMode} />
     </Box>
   );
 }
