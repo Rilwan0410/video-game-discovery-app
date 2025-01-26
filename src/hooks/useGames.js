@@ -3,8 +3,7 @@ import APIClientService from "../services/api-client";
 import store from "../store/store";
 
 function useGames(selectedGenre, selectedPlatform, sortBy, searchby) {
-
-const   {search} = store()
+  const { search } = store();
   const apiClient = new APIClientService("games");
   return useInfiniteQuery({
     queryKey: [
@@ -13,7 +12,6 @@ const   {search} = store()
       selectedPlatform?.id,
       sortBy?.value,
       searchby,
-
     ],
     queryFn: ({ pageParam = 1 }) =>
       apiClient.get({
