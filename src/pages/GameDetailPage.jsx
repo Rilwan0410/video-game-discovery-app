@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Heading, Box } from "@chakra-ui/react";
+import { Heading, Box, Stack, SimpleGrid } from "@chakra-ui/react";
 import { SkeletonText, Skeleton } from "../components/ui/skeleton";
 import GameDetailsGrid from "../components/GameDetailsGrid";
 import APIClientService from "../services/api-client";
@@ -22,16 +22,22 @@ function GameDetails() {
       <Skeleton height="300px" />
     </Box>
   ) : (
-    <Box padding={5} paddingBottom="80px" width="full">
-      <Heading marginBottom={4} size="5xl">
-        {data?.name}
-      </Heading>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap={2} paddingBottom="80px">
+      <Stack>
+        <Box padding={5}  >
+          <Heading marginBottom={4} size="5xl">
+            {data?.name}
+          </Heading>
 
-      <ExpandableText text={data?.description_raw} />
-      <GameDetailsGrid game={data} />
-      <GameTrailer params={params} />
-      <GameScreenshots params={params} />
-    </Box>
+          <ExpandableText text={data?.description_raw} />
+          <GameDetailsGrid game={data} />
+        </Box>
+      </Stack>
+      <Stack >
+        <GameTrailer params={params} />
+        <GameScreenshots params={params} />
+      </Stack>
+    </SimpleGrid>
   );
 }
 

@@ -2,9 +2,10 @@ import APIClientService from "../services/api-client";
 
 function GameTrailer({ params }) {
   const apiClient = new APIClientService();
-  const { data: movieData } = apiClient.getGame(["games", params.id, "movies"]);
-  let vid =
-    movieData?.results[Math.floor(Math.random() * movieData?.results.length)];
+  const { data } = apiClient.getGame(["games", params.id, "movies"]);
+
+  let vid = data?.results[Math.floor(Math.random() * data?.results.length)];
+
   return (
     <>
       {vid ? (
@@ -14,7 +15,9 @@ function GameTrailer({ params }) {
           width={1100}
           poster={vid?.preview}
           style={{
-            marginTop: "50px",
+            padding: "20px",
+            marginTop: "20px",
+            paddingBotton:'50px',
             marginInline: "auto",
           }}
         />

@@ -5,7 +5,12 @@ import { Badge } from "@chakra-ui/react";
 function GameDetailsGrid({ game }) {
   const { colorMode } = useColorMode();
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gapY={20} paddingTop={10}>
+    <Grid
+      templateColumns="repeat(2, 1fr)"
+      gapY={20}
+    //   paddingBottom="100px"
+      paddingTop="60px"
+    >
       <GridItem height="auto">
         <Box>
           <Heading

@@ -9,11 +9,14 @@ function GameScreenshots({ params }) {
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 1, lg: 2, xl: 2 }}
-      gap={4}
-      paddingTop="150px"
+      gapX={6}
+      gapY={8}
+      
+      paddingX={5}
+      paddingTop="50px"
     >
       {data?.results.map(({ image }, i) => (
-        <Image key={i} src={image} />
+        <Image borderRadius={2} key={i} src={image} />
       ))}
     </SimpleGrid>
   );
