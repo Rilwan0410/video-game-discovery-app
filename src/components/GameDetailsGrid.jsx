@@ -38,7 +38,13 @@ function GameDetailsGrid({ game }) {
           </Heading>
           {game?.metacritic && (
             <Badge
-              colorPalette={"green"}
+              colorPalette={
+                game?.metacritic > 80
+                  ? "green"
+                  : game?.metacritic > 60
+                  ? "yellow"
+                  : "red"
+              }
               size="md"
               fontWeight="bold"
               fontSize="md"
