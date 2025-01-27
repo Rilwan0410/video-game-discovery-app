@@ -16,8 +16,8 @@ function GameScreenshots({ params }) {
       paddingTop="50px"
     >
       {data?.results.map(({ image }, i) => (
-        <Link href={image} outline="none">
-          <Image borderRadius={2} key={i} src={image} />
+        <Link href={image} key={i} outline="none">
+          <Image borderRadius={2} src={image} />
         </Link>
       ))}
     </SimpleGrid>
