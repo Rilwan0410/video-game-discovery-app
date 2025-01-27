@@ -8,7 +8,7 @@ function GameDetailsGrid({ game }) {
     <Grid
       templateColumns="repeat(2, 1fr)"
       gapY={20}
-    //   paddingBottom="100px"
+      //   paddingBottom="100px"
       paddingTop="60px"
     >
       <GridItem height="auto">
@@ -36,16 +36,18 @@ function GameDetailsGrid({ game }) {
           >
             Metascore
           </Heading>
-          <Badge
-            colorPalette={"green"}
-            size="md"
-            fontWeight="bold"
-            fontSize="md"
-            paddingX={2}
-            marginTop={2}
-          >
-            {game?.metacritic}
-          </Badge>
+          {game?.metacritic && (
+            <Badge
+              colorPalette={"green"}
+              size="md"
+              fontWeight="bold"
+              fontSize="md"
+              paddingX={2}
+              marginTop={2}
+            >
+              {game?.metacritic}
+            </Badge>
+          )}
         </Box>
       </GridItem>
       <GridItem height="auto">
