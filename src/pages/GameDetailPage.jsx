@@ -6,20 +6,18 @@ import { useQuery } from "@tanstack/react-query";
 import { SkeletonText, Skeleton } from "../components/ui/skeleton";
 import { useColorMode } from "../components/ui/color-mode";
 import GameDetailsGrid from "../components/GameDetailsGrid";
+import APIClientService from "../services/api-client";
+import ExpandableText from "../components/ExpandableText";
 function GameDetails() {
-  const { colorMode } = useColorMode();
-  let [collapseString, setCollapseString] = useState(true);
+  const apiClient = new APIClientService();
+
   const params = useParams();
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["game"],
-    queryFn: async () => {
-      const { data } = await base.get(`/games/${params.id}`);
-      return data;
-    },
-    staleTime: 86_400_000,
-  });
-
+  const { data, isLoading, error } = apiClient.getGame(["games", params.id]);
+  const { data: movieData } = apiClient.getGame(["games", params.id, "movies"]);
+  console.log(movieData);
+  let vid =
+    movieData?.results[Math.floor(Math.random() * movieData?.results.length)];
 
   return isLoading ? (
     <Box padding={5}>
@@ -27,35 +25,28 @@ function GameDetails() {
       <Skeleton height="300px" />
     </Box>
   ) : (
-    <Box padding={5}>
-      <Heading marginBottom={4}  size="5xl">
+    <Box padding={5} paddingBottom="80px" width="full">
+      <Heading marginBottom={4} size="5xl">
         {data?.name}
       </Heading>
-      <Text fontSize="lg">
-        {data?.description_raw.length > 400 && collapseString === true ? (
-          <>
-            <span>{data?.description_raw.substring(0, 400)}... </span>
-          </>
-        ) : (
-          data?.description_raw
-        )}
-        {data?.description_raw.length > 400 && (
-          <Button
-            bg={colorMode === "dark" ? "#FFFF80" : "gold"}
-            color="black"
-            fontSize="sm"
-            size="xs"
-            fontWeight="bold"
-            borderRadius="lg"
-            display={collapseString ? "" : "block"}
-            onClick={() => setCollapseString(!collapseString)}
-          >
-            {collapseString ? "Show More" : "Show Less"}
-          </Button>
-        )}
-      </Text>
+      <ExpandableText text={data?.description_raw} />
 
-      <GameDetailsGrid game={data} colorMode={colorMode} />
+      <GameDetailsGrid game={data} />
+
+      {vid ? (
+        <video
+          controls
+          src={vid?.data["480"]}
+          width={1100}
+          poster={vid?.preview}
+          style={{
+            marginTop: "50px",
+            marginInline: "auto",
+          }}
+        />
+      ) : (
+        ""
+      )}
     </Box>
   );
 }

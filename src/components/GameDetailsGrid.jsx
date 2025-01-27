@@ -1,8 +1,9 @@
 import { Grid, GridItem, Box, Heading, Text } from "@chakra-ui/react";
-
+import ExpandableText from "./ExpandableText";
+import { useColorMode } from "./ui/color-mode";
 import { Badge } from "@chakra-ui/react";
-function GameDetailsGrid({ game, colorMode }) {
-  console.log(game);
+function GameDetailsGrid({ game }) {
+  const { colorMode } = useColorMode();
   return (
     <Grid templateColumns="repeat(2, 1fr)" gapY={20} paddingTop={10}>
       <GridItem height="auto">
