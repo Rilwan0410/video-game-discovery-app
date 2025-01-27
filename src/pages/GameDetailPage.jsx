@@ -1,23 +1,20 @@
 import { useParams } from "react-router-dom";
-import { base } from "../services/api-client";
-import { Heading, Text, Box, Button } from "@chakra-ui/react";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { Heading, Box } from "@chakra-ui/react";
 import { SkeletonText, Skeleton } from "../components/ui/skeleton";
-import { useColorMode } from "../components/ui/color-mode";
 import GameDetailsGrid from "../components/GameDetailsGrid";
 import APIClientService from "../services/api-client";
 import ExpandableText from "../components/ExpandableText";
+import GameTrailer from "../components/GameTrailer";
+import GameScreenshots from "../components/GameScreenshots";
+
 function GameDetails() {
   const apiClient = new APIClientService();
 
   const params = useParams();
 
   const { data, isLoading, error } = apiClient.getGame(["games", params.id]);
-  const { data: movieData } = apiClient.getGame(["games", params.id, "movies"]);
-  console.log(movieData);
-  let vid =
-    movieData?.results[Math.floor(Math.random() * movieData?.results.length)];
+
+  if (error) throw Error;
 
   return isLoading ? (
     <Box padding={5}>
@@ -29,24 +26,11 @@ function GameDetails() {
       <Heading marginBottom={4} size="5xl">
         {data?.name}
       </Heading>
+
       <ExpandableText text={data?.description_raw} />
-
       <GameDetailsGrid game={data} />
-
-      {vid ? (
-        <video
-          controls
-          src={vid?.data["480"]}
-          width={1100}
-          poster={vid?.preview}
-          style={{
-            marginTop: "50px",
-            marginInline: "auto",
-          }}
-        />
-      ) : (
-        ""
-      )}
+      <GameTrailer params={params} />
+      <GameScreenshots params={params} />
     </Box>
   );
 }
