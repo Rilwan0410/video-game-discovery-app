@@ -5,7 +5,10 @@ import SearchInput from "./SearchInput";
 import { useColorMode } from "./ui/color-mode";
 import store from "../store/store";
 
+
 function Navbar() {
+  
+
   const { search, setSearch } = store();
   const { colorMode } = useColorMode();
   return (

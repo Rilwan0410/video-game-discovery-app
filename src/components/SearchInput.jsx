@@ -1,11 +1,14 @@
 import { Input, Group, InputAddon, Fieldset } from "@chakra-ui/react";
 import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import store from "../store/store";
 function SearchInput() {
   const [input, setInput] = useState("");
   const setSearch = store((s) => s.setSearch);
-
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <form
       action=""
@@ -13,6 +16,7 @@ function SearchInput() {
         e.preventDefault();
         setSearch(input);
         setInput("");
+        if (location.pathname !== "/") navigate("/");
         window.scrollTo({
           top: 0,
           behavior: "smooth",
