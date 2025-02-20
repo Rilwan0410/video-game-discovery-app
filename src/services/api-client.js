@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const base = axios.create({
   baseURL: "https://api.rawg.io/api",
-  params: { key: "8abd46b86e214b45b1bbf42b0a150b33" },
+  params: { key: "4dc58afcbcb54152ab8d811099ba9dd5" },
 });
 
 class APIClientService {
